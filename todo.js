@@ -24,7 +24,7 @@
 //Somehow calculate the average rating in the App
 //X
 //Set up delete route
-
+//X
 
 //set up add route
 //X
