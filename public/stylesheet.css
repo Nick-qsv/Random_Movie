@@ -1,0 +1,34 @@
+* {
+    font-family: Verdana
+}
+
+.header-button--container {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 15px;
+}
+.button--movie {
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}
+
+.movielist--Container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movieList--movie{
+    display:flex;
+    align-items:center;
+    gap: 10px
+}
+
+.whynowork{
+    display:flex;
+    justify-content: center;
+}
