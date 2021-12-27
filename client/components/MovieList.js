@@ -8,10 +8,10 @@ export default function AllMovies(props){
             {props.movies.map((movie)=>{
                 return (
                     <div className="movieList--movie" key={movie.id}>
-                        <button>Delete</button>
+                        <button onClick={()=>props.delete(movie.id)}>Delete</button>
                         <p className="movie--title">{movie.title}  ({movie.rating})</p>
-                        <button className="movie--add_delete">+</button>
-                        <button className="movie--add_delete">-</button>
+                        <button onClick={()=>props.addRating(movie.id)}className="movie--add_delete">+</button>
+                        <button onClick={()=>props.subRating(movie.id)}className="movie--add_delete">-</button>
                     </div>
                 )
             })}

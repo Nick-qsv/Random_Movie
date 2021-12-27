@@ -25,6 +25,16 @@ app.post('/movies/add-movie', async (req, res, next)=>{
     }
 })
 
+app.delete('/movies/delete-movie/:id', async (req, res, next)=>{
+    try{
+        const oneMovie = await Movie.findByPk(req.params.id)
+        oneMovie.destroy();
+        res.send(await Movie.findAll())
+    }catch(ex){
+        next(ex)
+    }
+})
+
 
 const init = async()=>{
     try{

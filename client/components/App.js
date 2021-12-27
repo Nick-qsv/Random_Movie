@@ -1,7 +1,7 @@
 import React from "react";
 import Component from "react";
 import { connect } from "react-redux";
-import { _postMovie } from "../../store/store";
+import { _postMovie, add, subtract, _deleteMovie } from "../../store/store";
 
 import MovieList from "./MovieList";
 const faker = require("faker");
@@ -13,10 +13,9 @@ class App extends React.Component {
       movies: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addRating = this.addRating.bind(this);
+    this.subRating = this.subRating.bind(this);
   }
-  // async componentDidMount(){
-  //     await this.props.loadMovies();
-  // }
 
   handleSubmit(evt) {
     evt.preventDefault();
@@ -26,21 +25,23 @@ class App extends React.Component {
     };
     this.props.addMovie(movie);
   }
-  addRating(evt){
-      evt.preventDefault();
-      
+  addRating(id) {
+    this.props.add(id);
+  }
+  subRating(id) {
+    this.props.subtract(id);
   }
 
   render() {
     const { movies } = this.props;
-
+    console.log('this is props--->',this.props)
     return (
       <div>
         <div className="header-button--container">
           {movies.length !== 0 ? (
             <h1>
               The Average Rating is{" "}
-               {Math.round(
+              {Math.round(
                 movies.reduce((totalRating, movie) => {
                   totalRating += movie.rating;
                   return totalRating;
@@ -55,7 +56,12 @@ class App extends React.Component {
             Generate Random Movie
           </button>
         </div>
-        <MovieList movies={movies} />
+        <MovieList
+          movies={movies}
+          addRating={this.addRating}
+          subRating={this.subRating}
+          delete={this.props.delete}
+        />
       </div>
     );
   }
@@ -71,6 +77,8 @@ const mapDispatch = (dispatch) => {
   return {
     addMovie: (movie) => dispatch(_postMovie(movie)),
     add: (id) => dispatch(add(id)),
+    subtract: (id) => dispatch(subtract(id)),
+    delete: (id) => dispatch(_deleteMovie(id))
   };
 };
 

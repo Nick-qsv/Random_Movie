@@ -10,7 +10,8 @@ import { DELETE } from 'sequelize/dist/lib/query-types'
 const POST_MOVIE = "POST_MOVIE"
 const DELETE_MOVIE = "DELETE_MOVIE"
 const LOAD_MOVIES = "LOAD_MOVIES"
-
+const ADD = "ADD"
+const SUBTRACT = "SUBTRACT"
 //ACTION CREATOR
 const postMovie = (movie)=>{
     return {
@@ -19,10 +20,10 @@ const postMovie = (movie)=>{
     }
 }
 
-const deleteMovie = (movie)=>{
+const deleteMovie = (id)=>{
     return {
         type:DELETE_MOVIE,
-        movie
+        id
     }
 }
 
@@ -30,6 +31,20 @@ const loadMovies = (movies)=>{
     return{
         type:LOAD_MOVIES,
         movies
+    }
+}
+
+export const add = (id)=>{
+    return{
+        type: ADD,
+        id
+    }
+}
+
+export const subtract = (id)=>{
+    return{
+        type: SUBTRACT,
+        id
     }
 }
 //THUNKS
@@ -42,7 +57,7 @@ export const _postMovie = (movie) =>{
 
 export const _deleteMovie = (id)=>{
     return async (dispatch)=>{
-        (await axios.delete(''))
+        (await axios.delete(`/movies/delete-movie/${id}`))
         dispatch(deleteMovie(id))
     }
 }
@@ -73,6 +88,22 @@ const reducer = (state = initialState, action)=>{
         case LOAD_MOVIES:
             return{
                 movies: action.movies
+            }
+        case ADD:
+            const addMovies = [...state.movies]
+            addMovies.forEach((movie)=>{if(movie.id === action.id && movie.rating !== 5){
+                movie.rating +=1;
+            }});
+            return{
+                movies: addMovies
+            }
+        case SUBTRACT:
+            const subMovies = [...state.movies]
+            subMovies.forEach((movie)=>{if(movie.id === action.id && movie.rating !== 1){
+                movie.rating -=1;
+            }})
+            return{
+                movies: subMovies
             }
         default:
             return state
