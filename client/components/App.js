@@ -27,14 +27,19 @@ class App extends React.Component {
   }
   addRating(id) {
     this.props.add(id);
+    console.log('THIS IS STATE AFTER ADD IS PRESSED---->', this.props.movies)
+    this.setState(this.props.movies.sort((x,y)=>
+    (x.rating) - (y.rating)))
   }
   subRating(id) {
     this.props.subtract(id);
+    console.log('THIS IS STATE AFTER Subtract IS PRESSED---->', this.state)
   }
 
   render() {
     const { movies } = this.props;
-    console.log('this is props--->',this.props)
+    
+
     return (
       <div>
         <div className="header-button--container">
@@ -42,11 +47,11 @@ class App extends React.Component {
             <h1>
               The Average Rating is{" "}
               {Math.round(
-                movies.reduce((totalRating, movie) => {
+                (movies.reduce((totalRating, movie) => {
                   totalRating += movie.rating;
                   return totalRating;
-                }, 0) / movies.length
-              )}
+                }, 0) / movies.length*10)
+              )/10}
               !
             </h1>
           ) : (

@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function AllMovies(props){
-    console.log('THIS IS ALL MOVIES PROPS---->', props)
+    // console.log('THIS IS ALL MOVIES PROPS---->', props)
     return(
         props.movies.length !== 0 ?
         <div className="movieList--container">

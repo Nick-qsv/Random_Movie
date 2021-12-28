@@ -102,7 +102,7 @@ const reducer = (state = initialState, action)=>{
             subMovies.forEach((movie)=>{if(movie.id === action.id && movie.rating !== 1){
                 movie.rating -=1;
             }})
-            // .sort((a,b)=>{a.rating - b.rating})
+            subMovies.sort((a,b)=>{a.rating - b.rating})
             return{
                 movies: subMovies
             }
