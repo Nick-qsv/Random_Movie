@@ -52,7 +52,7 @@ class App extends React.Component {
                   return totalRating;
                 }, 0) / movies.length*10)
               )/10}
-              !
+              {" "}☆!
             </h1>
           ) : (
             <h1></h1>

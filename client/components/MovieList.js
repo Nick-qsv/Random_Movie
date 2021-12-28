@@ -9,7 +9,7 @@ export default function AllMovies(props){
                 return (
                     <div className="movieList--movie" key={movie.id}>
                         <button onClick={()=>props.delete(movie.id)}>Delete</button>
-                        <p className="movie--title">{movie.title}  ({movie.rating})</p>
+                        <p className="movie--title">{movie.title}  ({movie.rating} ☆)</p>
                         <button onClick={()=>props.addRating(movie.id)}className="movie--add_delete">+</button>
                         <button onClick={()=>props.subRating(movie.id)}className="movie--add_delete">-</button>
                     </div>
